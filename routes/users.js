@@ -6,8 +6,13 @@ const authenticate = require('../authenticate');
 const user = require('../models/user');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
+router.get('/', authenticate.verifyUser, authenticate.verifyAdmin, async function(req, res, next) {
+    const user= await User.find()
+    
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(users);
+    // .catch(err =>next(err));
 });
 
 router.post('/signup', (req, res) => {
