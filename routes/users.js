@@ -8,7 +8,6 @@ const user = require('../models/user');
 /* GET users listing. */
 router.get('/', authenticate.verifyUser, authenticate.verifyAdmin, async function(req, res, next) {
     const user= await User.find()
-    
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(users);
